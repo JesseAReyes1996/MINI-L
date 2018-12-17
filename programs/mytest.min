@@ -13,9 +13,8 @@ endlocals
 beginbody	## main program
 
   read i, j;
-##z := func(i);
+
   k := 0;
-  continue;
   n := 20;
 
   do

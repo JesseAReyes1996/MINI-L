@@ -1,10 +1,4 @@
-/* cs152-fall18 */
-  /* An intermediate code generator for the MINI-L language */
-
-/*
-Name: Jesse Reyes
-SID: 861148238
-*/
+/* An intermediate code generator for the MINI-L language */
 
 %{
  #include "heading.h"
@@ -63,7 +57,7 @@ vector<string> reserved(reservedArray, reservedArray + sizeof(reservedArray)/siz
 
 %%
 prog_start: functions
-		  ;
+	   ;
 
 functions: /* empty */
           {
@@ -93,10 +87,10 @@ func_name: FUNCTION IDENT
           ;
 
 beginparams: BEGIN_PARAMS { declaringVars = true; declaringParams = true; }
-           ;
+            ;
 
 endparams: END_PARAMS { declaringVars = false; declaringParams = false; }
-         ;
+          ;
 
 beginlocals: BEGIN_LOCALS { declaringVars = true; }
             ;
@@ -180,7 +174,7 @@ declaration: identifier COLON INTEGER
             }
  		    ;
 
-identifier:	IDENT
+identifier: IDENT
            {
                 if(declaringVars)
                 {
@@ -195,7 +189,7 @@ identifier:	IDENT
                     parameters.push_back(*($1));
                 }
            }
- 		   | IDENT COMMA identifier
+ 	   | IDENT COMMA identifier
            {
                 if(declaringVars)
                 {
@@ -283,7 +277,7 @@ ifelse: if_statement statements ENDIF
             if_label.pop_back();
         }
         | elseif statements ENDIF
-		{
+	{
            statements.push_back(": " + if_label.back().at(2));
            if_label.pop_back();
         }
@@ -469,14 +463,14 @@ writevars: WRITE term_varnum varcomma
             }
             op.clear();
         }
-		;
+	;
 
-varcomma:		/* empty */
-		| COMMA term_varnum varcomma
+varcomma: /* empty */
+	| COMMA term_varnum varcomma
         ;
 
 bool_expr: relation_and_expr
-		 | bool_expr OR relation_and_expr
+	 | bool_expr OR relation_and_expr
          {
              ss.str("");
              ss << __temp__count;
@@ -491,10 +485,10 @@ bool_expr: relation_and_expr
              statements.push_back("|| " + __temp__ + ", " + op1 + ", " + op2);
              op.push_back(__temp__);
          }
-		 ;
+	 ;
 
-relation_and_expr:	relation_expr
-        		  | relation_and_expr AND relation_expr
+relation_and_expr: relation_expr
+        	  | relation_and_expr AND relation_expr
                   {
                         ss.str("");
                         ss << __temp__count;
@@ -509,10 +503,10 @@ relation_and_expr:	relation_expr
                         statements.push_back("&& " + __temp__ + ", " + op1 + ", " + op2);
                         op.push_back(__temp__);
                   }
-        		  ;
+        	  ;
 
-relation_expr:	comptr
-		      | NOT comptr
+relation_expr: comptr
+	      | NOT comptr
               {
                     ss.str("");
                     ss << __temp__count;
@@ -542,7 +536,7 @@ comptr:	expression EQ expression
             statements.push_back("== " + __temp__ + ", " + op1 + ", " + op2);
             op.push_back(__temp__);
         }
-		| expression NEQ expression
+	| expression NEQ expression
         {
             ss.str("");
             ss << __temp__count;
@@ -557,7 +551,6 @@ comptr:	expression EQ expression
             statements.push_back("!= " + __temp__ + ", " + op1 + ", " + op2);
             op.push_back(__temp__);
         }
-
         | expression LT expression
         {
             ss.str("");
@@ -629,7 +622,7 @@ comptr:	expression EQ expression
             statements.push_back("= " + __temp__ + ", 1");
             op.push_back(__temp__);
         }
-		| FALSE
+	| FALSE
         {
             ss.str("");
             ss << __temp__count;
@@ -640,10 +633,10 @@ comptr:	expression EQ expression
             statements.push_back("= " + __temp__ + ", 0");
             op.push_back(__temp__);
         }
-		| L_PAREN bool_expr R_PAREN
+	| L_PAREN bool_expr R_PAREN
         ;
 
-expression:	multiplicative_expr
+expression: multiplicative_expr
            | multiplicative_expr ADD expression
            {
                 ss.str("");
@@ -674,7 +667,7 @@ expression:	multiplicative_expr
                 statements.push_back("- " + __temp__ + ", " + op1 + ", " + op2);
                 op.push_back(__temp__);
            }
-		   ;
+	   ;
 
 multiplicative_expr: term
                     | term MULT multiplicative_expr

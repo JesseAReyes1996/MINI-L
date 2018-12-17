@@ -1,4 +1,3 @@
-#MINI-L
 A compiler for the MINI-L programming language. Provides robust error reporting when encountering any syntax or semantic errors.
 
 Run "make" from within the directory to produce the compiler executable.

@@ -1,3 +1,5 @@
+# MINI-L Compiler
+
 A compiler for the Turing-complete language MINI-L. The compiler takes the source language and generates intermediate code to be interpreted and subsequently executed by the MIL interpreter. Provides robust error reporting when encountering any syntax or semantic errors.
 
 ![](./images/MINI-L.png)
